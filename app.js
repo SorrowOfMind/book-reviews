@@ -3,6 +3,7 @@ const connectDb = require('./config/db');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const router = require('./routes/index');
+const path = require('path');
 require('dotenv').config({path: '.env'});
 
 
@@ -11,8 +12,9 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
 app.set('view engine', '.hbs');
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', router)
+app.use('/', router);
 
 connectDb();
 
