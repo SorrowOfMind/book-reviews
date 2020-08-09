@@ -1,0 +1,23 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+    box-shadow: none;
+}
+
+body, html {
+    scroll-behavior:  smooth;
+    min-height: 100%;
+}
+
+
+.login-container {
+    min-width: 340px;
+    max-width: 450px;
+    text-align: center;
+}
+
+.subtitle {
+    color: rgb(216, 5, 5);
+}
