@@ -3,14 +3,25 @@ const connectDb = require('./config/db');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const router = require('./routes/index');
+const passport = require('passport');
+const session = require('express-sessions');
 require('dotenv').config({path: '.env'});
-
+require('./config/passport')(passport);
 
 const app = express();
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
 app.set('view engine', '.hbs');
+
+app.use(session({
+    secret: 'catnip',
+    resave: false,
+    saveUninitialized: false,
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', router)
 
