@@ -1,11 +1,13 @@
 const express = require('express');
 const connectDb = require('./config/db');
+const mongoose = require('mongoose');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const mainRoutes = require('./routes/index');
 const authRoutes = require('./routes/auth');
 const passport = require('passport');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const path = require('path');
 
 require('dotenv').config({path: '.env'});
@@ -22,6 +24,7 @@ app.use(session({
     secret: 'catnip',
     resave: false,
     saveUninitialized: false,
+    store: new MongoStore({mongooseConnection: mongoose.connection})
 }))
 
 app.use(passport.initialize());
