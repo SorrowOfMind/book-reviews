@@ -4,19 +4,19 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     googleId: { 
         type: String, 
-        required
+        required: true
     },
     displayName: { 
         type: String, 
-        required
+        required: true
     },
     firstName: { 
         type: String, 
-        required
+        required: true
     },
     lastName: { 
         type: String, 
-        required
+        required: true
     },
     image: { 
         type: String

@@ -2,9 +2,10 @@ const express = require('express');
 const connectDb = require('./config/db');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
-const router = require('./routes/index');
+const mainRoutes = require('./routes/index');
+const authRoutes = require('./routes/auth');
 const passport = require('passport');
-const session = require('express-sessions');
+const session = require('express-session');
 const path = require('path');
 
 require('dotenv').config({path: '.env'});
@@ -26,7 +27,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', router)
+app.use('/', mainRoutes);
+app.use('/auth', authRoutes);
 
 connectDb();
 
