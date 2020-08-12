@@ -1,3 +1,26 @@
 <h5>Dashboard</h5>
-<h3>Welcome {{name}} :)</h3>
+<h3>Welcome {{name}}!</h3>
 <p>Here are your reviews</p>
+{{#if reviews}}
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each reviews}}
+                <tr>
+                    <td><a href="/reviews/{{_id}}">{{title}}</a></td>
+                    <td>{{createdAt}}</td>
+                    <td><span class="dash-status">{{status}}</span></td>
+                    <td></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <p>You haven't submitted any reviews yet</p>
+{{/if}}

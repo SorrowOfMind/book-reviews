@@ -8,7 +8,7 @@ router.get('/', ensureGuest, (req, res) => {
 
 router.get('/dashboard', ensureAuth, async (req, res) => {
     try {
-        const reviews = Review.find({user: req.user.id}).lean();
+        const reviews = await Review.find({user: req.user.id}).lean();
         res.render('dashboard', {
             name: req.user.firstName,
             reviews
