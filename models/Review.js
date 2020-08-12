@@ -16,7 +16,7 @@ const reviewSchema = new Schema({
         type: String,
         required: true,
     },
-    note: {
+    score: {
         type: Number,
         min: 0,
         max: 10

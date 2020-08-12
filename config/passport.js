@@ -18,7 +18,7 @@ module.exports = function(passport) {
         }
 
         try {
-            let user = await User.findOne({googleI: profile.id})
+            let user = await User.findOne({googleId: profile.id})
             if (user) cb(null, user)
             else {
                 user = await User.create(newUser);
