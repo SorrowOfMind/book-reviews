@@ -1,0 +1,39 @@
+<h3>Submit a review</h3>
+<div class="row">
+    <form action="/reviews" method="post" class="col s12">
+        <div class="row">
+            <div class="input-field">
+                <input type="text" id="title" name="title">
+                <label for="title">Book title</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <input type="text" id="author" name="author">
+                <label for="author">Book author</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <h5>Your review:</h5>
+                <textarea name="review" id="review" col="30"></textarea>
+            </div>
+        </div>
+
+         <div class="row">
+            <div class="input-field">
+                <input type="number" id="score" name="score" min="0" max="10">
+                <label for="score">Your score:</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="submit" value="Save" class="btn">
+            <a href="/dashboard" class="btn orange">Cancel</a>
+        </div>
+
+     
+    </form>
+</div>

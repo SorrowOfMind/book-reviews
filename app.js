@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const mainRoutes = require('./routes/index');
 const authRoutes = require('./routes/auth');
+const reviewRoutes = require('./routes/review');
 const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
@@ -32,6 +33,7 @@ app.use(passport.session());
 
 app.use('/', mainRoutes);
 app.use('/auth', authRoutes);
+app.use('/reviews', reviewRoutes);
 
 connectDb();
 
