@@ -15,6 +15,10 @@ require('dotenv').config({path: '.env'});
 require('./config/passport')(passport);
 
 const app = express();
+
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
