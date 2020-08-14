@@ -10,6 +10,7 @@ const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const path = require('path');
+const {formatDate} = require('./helpers/hbs');
 
 require('dotenv').config({path: '.env'});
 require('./config/passport')(passport);
@@ -21,8 +22,13 @@ app.use(express.json());
 
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
-app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
+
+
+app.engine('.hbs', exphbs({helpers: {
+    formatDate
+},defaultLayout: 'main', extname: '.hbs'}));
 app.set('view engine', '.hbs');
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
