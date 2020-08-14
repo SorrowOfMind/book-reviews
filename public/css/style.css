@@ -22,3 +22,17 @@ body, html {
 .subtitle {
     color: rgb(216, 5, 5);
 }
+
+.card-content {
+    position: relative;
+}
+
+.score {
+    padding: 10px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    line-height: 1;
+    border-radius: 50%;
+}
