@@ -4,7 +4,7 @@
         <div class="col s12 m4">
             <div class="card">
                 <div class="card-image">
-                    {{!-- to do --}}
+                    {{{editIcon user ../user _id}}}
                 </div>
                 <div class="card-content center-align">
                     <h5>{{title}}</h5>
@@ -12,8 +12,8 @@
                     <span class="blue lighten-3 score">{{score}}</span>
                     <br>
                     <div class="chip">
-                        <img src="{{user.image}}" alt="">
-                        <a href="/reviews/user/{{uer_id}}">{{user.dispalyName}}</a>
+                        <img src={{user.image}} alt="">
+                        <a href="/reviews/user/{{uer_id}}">{{user.displayName}}</a>
                     </div>
                 </div>
                 <div class="card-action center-align">

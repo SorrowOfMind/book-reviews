@@ -32,7 +32,11 @@ body, html {
     font-weight: bold;
     position: absolute;
     top: 10px;
-    right: 10px;
+    left: 10px;
     line-height: 1;
     border-radius: 50%;
+}
+
+.fa-small {
+    font-size: 16px !important;
 }
