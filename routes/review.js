@@ -28,6 +28,20 @@ router.get('/', ensureAuth, async (req, res) => {
         console.error(err);
         res.render('error/500');
     }
+});
+
+router.get('/edit/:id', async (req, res) => {
+    try {
+        const review = await Review.findOne({_id: req.params.id}).lean();
+        if (!review) res.render('errors/404');
+        if (review.user.toString() != req.user._id) {
+            res.redirect('/reviews');
+        }
+        else res.render('reviews/edit', {review});
+    } catch (err) {
+        console.error(err)
+        return res.render('error/500')
+    }
 })
 
 
