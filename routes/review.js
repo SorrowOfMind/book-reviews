@@ -84,7 +84,21 @@ router.delete('/:id', ensureAuth, async (req, res) => {
         console.error(err);
         return res.render('error/500');
     }
-})
+});
+
+router.get('/user/:userId', ensureAuth, async (req, res) => {
+    try {
+        console.log(req.params.userId);
+        const reviews = await Review.find({
+            user: req.params.userId
+        })
+            .populate('user').lean();
+        res.render('reviews/index', {reviews});
+    } catch (err) {
+        console.error(err);
+        return res.render('error/500');
+    }
+});
 
 
 module.exports = router;
