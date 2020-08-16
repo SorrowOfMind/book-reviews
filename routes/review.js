@@ -44,18 +44,33 @@ router.get('/edit/:id', async (req, res) => {
 });
 
 router.put('/:id', ensureAuth, async (req, res) => {
-    let review = await Review.findById(req.params.id).lean();
+    try {
+        let review = await Review.findById(req.params.id).lean();
 
-    if (!review) return res.render('error/404');
+        if (!review) return res.render('error/404');
 
-    if (review.user.toString() != req.user._id) {
-        res.redirect('/reviews');
-    } else {
-        review = await Review.findOneAndUpdate({_id: req.params.id}, req.body, {
-            new: true,
-            runValidators: true
-        });
-        res.redirect('/dashboard');
+        if (review.user.toString() != req.user._id) {
+            res.redirect('/reviews');
+        } else {
+            review = await Review.findOneAndUpdate({_id: req.params.id}, req.body, {
+                new: true,
+                runValidators: true
+            });
+            res.redirect('/dashboard');
+        }
+    } catch (err) {
+        console.error(err);
+        return res.render('error/500');
+    }
+});
+
+router.delete('/:id', ensureAuth, async (req, res) => {
+    try {
+        await Review.remove({_id: req.params.id});
+        res.redirect('/dashboard')
+    } catch (err) {
+        console.error(err);
+        return res.render('error/500');
     }
 })
 
