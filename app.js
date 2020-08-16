@@ -3,6 +3,7 @@ const connectDb = require('./config/db');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
+const methodOverride = require('method-override');
 const mainRoutes = require('./routes/index');
 const authRoutes = require('./routes/auth');
 const reviewRoutes = require('./routes/review');
@@ -41,6 +42,14 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(methodOverride((req,res) => {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+        let method = req.body._method;
+        delete req.body._method;
+        return method;
+    }
+}))
 
 app.use((req, res, next) => {
     res.locals.user = req.user || null;

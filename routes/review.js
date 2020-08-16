@@ -36,11 +36,26 @@ router.get('/edit/:id', async (req, res) => {
         if (!review) res.render('errors/404');
         if (review.user.toString() != req.user._id) {
             res.redirect('/reviews');
-        }
-        else res.render('reviews/edit', {review});
+        } else res.render('reviews/edit', {review});
     } catch (err) {
         console.error(err)
         return res.render('error/500')
+    }
+});
+
+router.put('/:id', ensureAuth, async (req, res) => {
+    let review = await Review.findById(req.params.id).lean();
+
+    if (!review) return res.render('error/404');
+
+    if (review.user.toString() != req.user._id) {
+        res.redirect('/reviews');
+    } else {
+        review = await Review.findOneAndUpdate({_id: req.params.id}, req.body, {
+            new: true,
+            runValidators: true
+        });
+        res.redirect('/dashboard');
     }
 })
 
