@@ -30,6 +30,18 @@ router.get('/', ensureAuth, async (req, res) => {
     }
 });
 
+router.get('/:id', ensureAuth, async (req, res) => {
+    try {
+        let review = await Review.findById(req.params.id)
+            .populate('user').lean();
+        if (!review) return res.render('error/404');
+        res.render('reviews/show', {review});
+    } catch (err) {
+        console.error(err);
+        res.render('error/404');
+    }
+})
+
 router.get('/edit/:id', async (req, res) => {
     try {
         const review = await Review.findOne({_id: req.params.id}).lean();
